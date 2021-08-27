@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ResourceLocation;
 
+import java.awt.Color;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -39,7 +40,7 @@ public class FontRenderer {
     private final FontCharacter[] bitMapCharacters = new FontCharacter[256];
     private final int[] colorCodes = new int[32];
 
-    private static final float FONT_SCALE_FACTOR = 4;
+    private static final float FONT_SCALE_FACTOR = 8;
     private final int imgSize = 1024;
     private int fontHeight = -1;
 
@@ -187,10 +188,10 @@ public class FontRenderer {
             if (character > 256) {
                 // Revert the scale
                 scale(FONT_SCALE_FACTOR, FONT_SCALE_FACTOR, 1);
-                MC.fontRendererObj.drawString(chrAsString, (int) (baseX + strihgWidthOf(drawnChars.toString()) + 1), (int) (y / 4 + 1.5), color + (alpha << 24));
+                MC.fontRendererObj.drawString(chrAsString, (int) (baseX + strihgWidthOf(drawnChars.toString()) + 1), (int) (y / FONT_SCALE_FACTOR + 1.5), color + (alpha << 24));
                 // Apply the scale again
                 scale(1f / FONT_SCALE_FACTOR, 1f / FONT_SCALE_FACTOR, 1);
-                x += MC.fontRendererObj.getCharWidth(character) * 2 + 16;
+                x += MC.fontRendererObj.getCharWidth(character) * 2 + 4 * FONT_SCALE_FACTOR;
                 drawnChars.append(chrAsString);
                 // Bind back the bitmap texture
                 enableTexture2D();

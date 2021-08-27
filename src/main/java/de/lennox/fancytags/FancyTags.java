@@ -20,7 +20,6 @@ package de.lennox.fancytags;
 
 import net.labymod.api.LabyModAddon;
 import net.labymod.settings.elements.SettingsElement;
-import net.labymod.user.cosmetic.geometry.blockbench.South;
 
 import java.util.List;
 

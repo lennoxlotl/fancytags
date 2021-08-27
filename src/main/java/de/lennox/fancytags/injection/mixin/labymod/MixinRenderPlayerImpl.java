@@ -46,7 +46,7 @@ import static net.minecraft.client.renderer.GlStateManager.enableDepth;
 public class MixinRenderPlayerImpl {
 
     private final LivingLabelRenderer<AbstractClientPlayer> livingLabelRenderer = new LivingLabelRenderer<>();
-    private static final FontRenderer FR = Fonts.productSansOf(36);
+    private static final FontRenderer FR = Fonts.productSansOf(72);
 
     /**
      * @author Lennox
