@@ -21,6 +21,7 @@ package de.lennox.fancytags.render;
 import de.lennox.fancytags.render.font.FontRenderer;
 import de.lennox.fancytags.render.font.Fonts;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -33,7 +34,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class LivingLabelRenderer<T extends EntityLivingBase> {
 
     private static final Minecraft MC = Minecraft.getMinecraft();
-    private static final FontRenderer FR = Fonts.productSansOf(36);
+    private static final FontRenderer FR = Fonts.productSansOf(72);
 
     /**
      * Method to prepare label rendering
@@ -54,7 +55,7 @@ public class LivingLabelRenderer<T extends EntityLivingBase> {
         RenderManager renderManager = MC.getRenderManager();
         pushMatrix();
         // Translate to the position
-        translate(x + 0.0F, y + entityIn.height + 0.5F, z);
+        translate((float) x, (float) y + entityIn.height + 0.5F - (entityIn.isChild() ? entityIn.height / 2.0F : 0.0F), (float) z);
         // Rotate
         glNormal3f(0.0F, 1.0F, 0.0F);
         rotate(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
