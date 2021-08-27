@@ -1,11 +1,13 @@
 # Fancy Tags
 
-Fancy Tags is a LabyMod Addon which uses [Mixins](https://github.com/SpongePowered/Mixin/) to inject into minecraft to change
+Fancy Tags is a LabyMod Addon (1.8.9) which uses [Mixins](https://github.com/SpongePowered/Mixin/) to inject into minecraft to change
 the font of the minecraft entity labels to a custom font.
 
 ![screenshot1](https://host.snens.team/i/znctkrN9bhFR)
 <br>
 ![screenshot2](https://host.snens.team/i/URZKIQ0N7ZQi)
+<br>
+![screenshot3](https://host.snens.team/i/sN2HM3RxSIos)
 
 ## Installation
 
