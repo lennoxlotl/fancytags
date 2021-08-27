@@ -127,7 +127,7 @@ public class MixinRenderPlayerImpl {
 
                 // Check if the group of the player has a subtitle
                 if (labyGroup != null && labyGroup.getDisplayType() == EnumGroupDisplayType.BESIDE_NAME) {
-                    size = -FR.strihgWidthOf(username) / 4 - 2 - 8;
+                    size = -FR.strihgWidthOf(username) / 2 - 2 - 8;
                     livingLabelRenderer.prepare(entity, x, y, z);
                     labyGroup.renderBadge(size, -0.5D + offset, 8.0D, 8.0D, false);
                     livingLabelRenderer.finish();
