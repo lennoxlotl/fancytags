@@ -39,9 +39,6 @@ import net.minecraft.scoreboard.Scoreboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-import static net.minecraft.client.renderer.GlStateManager.depthMask;
-import static net.minecraft.client.renderer.GlStateManager.enableDepth;
-
 @Mixin(RenderPlayerImplementation.class)
 public class MixinRenderPlayerImpl {
 
@@ -77,7 +74,7 @@ public class MixinRenderPlayerImpl {
             // If the entity is sneaking draw the occluded label
             if (entity.isSneaking()) {
                 livingLabelRenderer.prepare(entity, x, y, z);
-                int i = (int) (FR.strihgWidthOf(username) / 2);
+                int i = (int) (FR.stringWidthOf(username) / 2);
                 // Draw the background
                 Tessellator tessellator = Tessellator.getInstance();
                 WorldRenderer worldrenderer = tessellator.getWorldRenderer();
@@ -91,7 +88,7 @@ public class MixinRenderPlayerImpl {
                 // Draw the text
                 GlStateManager.enableDepth();
                 GlStateManager.depthMask(true);
-                FR.drawString(username, -FR.strihgWidthOf(username) / 2, -1, 553648127);
+                FR.drawString(username, -FR.stringWidthOf(username) / 2, -1, 553648127);
                 livingLabelRenderer.finish();
             } else {
                 // Check if the user has a subtitle, if yes draw it
@@ -127,7 +124,7 @@ public class MixinRenderPlayerImpl {
 
                 // Check if the group of the player has a subtitle
                 if (labyGroup != null && labyGroup.getDisplayType() == EnumGroupDisplayType.BESIDE_NAME) {
-                    size = -FR.strihgWidthOf(username) / 2 - 2 - 8;
+                    size = -FR.stringWidthOf(username) / 2 - 2 - 8;
                     livingLabelRenderer.prepare(entity, x, y, z);
                     labyGroup.renderBadge(size, -0.5D + offset, 8.0D, 8.0D, false);
                     livingLabelRenderer.finish();

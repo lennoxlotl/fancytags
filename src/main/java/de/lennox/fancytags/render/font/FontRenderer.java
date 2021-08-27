@@ -112,7 +112,7 @@ public class FontRenderer {
         float y,
         int color
     ) {
-        return drawString(text, x - strihgWidthOf(text) / 2, y, color);
+        return drawString(text, x - stringWidthOf(text) / 2, y, color);
     }
 
     /**
@@ -130,8 +130,8 @@ public class FontRenderer {
         float y,
         int color
     ) {
-        float shadowWidth = drawString(text, x - strihgWidthOf(text) / 2 + 1, y + 1, color, true);
-        return Math.max(shadowWidth, drawString(text, x - strihgWidthOf(text) / 2, y, color));
+        float shadowWidth = drawString(text, x - stringWidthOf(text) / 2 + 1, y + 1, color, true);
+        return Math.max(shadowWidth, drawString(text, x - stringWidthOf(text) / 2, y, color));
     }
 
     /**
@@ -188,7 +188,7 @@ public class FontRenderer {
             if (character > 256) {
                 // Revert the scale
                 scale(FONT_SCALE_FACTOR, FONT_SCALE_FACTOR, 1);
-                MC.fontRendererObj.drawString(chrAsString, (int) (baseX + strihgWidthOf(drawnChars.toString()) + 1), (int) (y / FONT_SCALE_FACTOR + 1.5), color + (alpha << 24));
+                MC.fontRendererObj.drawString(chrAsString, (int) (baseX + stringWidthOf(drawnChars.toString()) + 1), (int) (y / FONT_SCALE_FACTOR + 1.5), color + (alpha << 24));
                 // Apply the scale again
                 scale(1f / FONT_SCALE_FACTOR, 1f / FONT_SCALE_FACTOR, 1);
                 x += MC.fontRendererObj.getCharWidth(character) * 2 + 4 * FONT_SCALE_FACTOR;
@@ -281,14 +281,14 @@ public class FontRenderer {
      * @param text The text as {@link String}
      * @return The width of the text
      */
-    public float strihgWidthOf(String text) {
+    public float stringWidthOf(String text) {
         float width = 0;
         int size = text.length();
         for (int i = 0; i < size; i++) {
             char character = text.charAt(i);
             // If the character is invalid, check it with the default minecraft font renderer
             if (character > 256) {
-                width += MC.fontRendererObj.getCharWidth(character) * 2 + 16;
+                width += MC.fontRendererObj.getCharWidth(character) * 2 + 4 * FONT_SCALE_FACTOR;
                 continue;
             }
             // If the character is a color code indicator then continue

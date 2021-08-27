@@ -21,7 +21,6 @@ package de.lennox.fancytags.render;
 import de.lennox.fancytags.render.font.FontRenderer;
 import de.lennox.fancytags.render.font.Fonts;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -78,7 +77,7 @@ public class LivingLabelRenderer<T extends EntityLivingBase> {
         // Get the display name of the entity
         String str = entityIn.getDisplayName().getFormattedText();
         int i = labelOffsetOf(entityIn);
-        float j = FR.strihgWidthOf(str) / 2;
+        float j = FR.stringWidthOf(str) / 2;
         // Draw the label background
         drawLabelBackground(j, i);
         // Draw the label text
@@ -97,7 +96,7 @@ public class LivingLabelRenderer<T extends EntityLivingBase> {
     ) {
         // Get the display name of the entity
         int i = labelOffsetOf(entityIn);
-        float j = FR.strihgWidthOf(label) / 2;
+        float j = FR.stringWidthOf(label) / 2;
         // Draw the label background
         drawLabelBackground(j, i);
         // Draw the label text
@@ -115,11 +114,11 @@ public class LivingLabelRenderer<T extends EntityLivingBase> {
         String text
     ) {
         // Draw the low alpha text for occluded entities
-        FR.drawString(text, -FR.strihgWidthOf(text) / 2, y - 1, 553648127);
+        FR.drawString(text, -FR.stringWidthOf(text) / 2, y - 1, 553648127);
         enableDepth();
         depthMask(true);
         // Draw the full alpha text for non occluded entities
-        FR.drawString(text, -FR.strihgWidthOf(text) / 2, y - 1, -1);
+        FR.drawString(text, -FR.stringWidthOf(text) / 2, y - 1, -1);
     }
 
     /**
