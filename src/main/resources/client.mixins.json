@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "de.lennox.fancytags.injection.mixin",
+  "refmap": "client.mixins.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "labymod.MixinRenderPlayerImpl"
+  ],
+  "client": [
+    "entity.MixinRendererLivingEntity"
+  ]
+}

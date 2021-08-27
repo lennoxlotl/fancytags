@@ -1,0 +1,10 @@
+{
+  "uuid": "%uuid%",
+  "name": "FancyTags",
+  "mainClass": "de.lennox.fancytags.FancyTags",
+  "transformerClass": "de.lennox.fancytags.injection.FancyTagsTransformer",
+  "description": "Changes the font of the normal minecraft entity labels.",
+  "version": 1.0,
+  "author": "Lennox",
+  "category": 1
+}

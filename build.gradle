@@ -1,0 +1,108 @@
+// For those who want the bleeding edge
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://repo.spongepowered.org/maven' }
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.6-SNAPSHOT'
+        classpath group: 'com.github.jengelman.gradle.plugins', name: 'shadow', version: '4.0.4'
+    }
+}
+
+apply plugin: "idea"
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: "java"
+apply plugin: 'com.github.johnrengelman.shadow'
+
+version = "1.0"
+group = "de.lennox.fancytags"
+archivesBaseName = "FancyTags"
+compileJava.options.encoding = 'UTF-8'
+
+minecraft {
+    version = "1.8.9-11.15.1.1855"
+    runDir = "run"
+    mappings = "stable_20"
+    makeObfSourceJar = false
+}
+
+configurations {
+    external
+    compile.extendsFrom external
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+
+    maven { url 'https://jitpack.io' }
+    maven {
+        name = 'spongepowered-repo'
+        url = 'https://repo.spongepowered.org/maven/'
+    }
+}
+
+dependencies {
+    external('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+        exclude module: "launchwrapper"
+        exclude module: "guava"
+        exclude module: "gson"
+        exclude module: "commons-io"
+    }
+}
+
+mixin {
+    defaultObfuscationEnv notch
+    add sourceSets.main, "client.mixins.refmap.json"
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/java'
+}
+
+jar {
+    dependsOn configurations.compile
+    from {
+        configurations.external.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude "META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA", "META_INF/*.MF"
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
+processResources {
+    inputs.files "src/main/resources"
+    outputs.dir "build/classes/main"
+    copy {
+        from("src/main/resources")
+        into("build/classes/main")
+    }
+}
+
+reobf {
+    shadowJar {
+        mappingType = 'SEARGE'
+    }
+    jar {
+        useNotchSrg()
+    }
+}
+tasks.reobfShadowJar.mustRunAfter shadowJar
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+build.dependsOn shadowJar
+
