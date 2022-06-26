@@ -25,6 +25,8 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Re-obfuscate with Gradle
+        run: ./gradlew reobfShadowJar
       - name: Upload jar
         uses: actions/upload-artifact@v1
         with:
