@@ -33,7 +33,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class LivingLabelRenderer<T extends EntityLivingBase> {
 
     private static final Minecraft MC = Minecraft.getMinecraft();
-    private static final FontRenderer FR = Fonts.productSansOf(72);
+    private static final FontRenderer FR = Fonts.interOf(72);
 
     /**
      * Method to prepare label rendering

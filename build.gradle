@@ -5,12 +5,16 @@ buildscript {
         maven { url 'https://repo.spongepowered.org/maven' }
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "jitpack"
+            url = "https://jitpack.io/"
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.6-SNAPSHOT'
+        classpath "com.github.asbyth:ForgeGradle:6f53277"
+        classpath "com.github.xcfrg:MixinGradle:0.6-SNAPSHOT"
         classpath group: 'com.github.jengelman.gradle.plugins', name: 'shadow', version: '4.0.4'
     }
 }
@@ -21,16 +25,16 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: "java"
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = "1.0"
+version = "0.1.0-SNAPSHOT"
 group = "de.lennox.fancytags"
 archivesBaseName = "FancyTags"
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {
-    version = "1.8.9-11.15.1.1855"
+    version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
-    mappings = "stable_20"
-    makeObfSourceJar = false
+    mappings = "stable_22"
+    makeObfSourceJar = true
 }
 
 configurations {
@@ -57,6 +61,7 @@ dependencies {
         exclude module: "gson"
         exclude module: "commons-io"
     }
+    annotationProcessor "org.spongepowered:mixin:0.7.11-SNAPSHOT"
 }
 
 mixin {
@@ -66,6 +71,9 @@ mixin {
 
 sourceSets {
     main.java.srcDirs += 'src/main/java'
+    main {
+        ext.refMap = "client.mixins.refmap.json"
+    }
 }
 
 jar {
@@ -91,9 +99,15 @@ processResources {
     }
 }
 
+shadowJar {
+    exclude 'lm_api_mc1.8.9.jar'
+    exclude 'dummyThing'
+//    excluse 'LICENSE.txt'
+}
+
 reobf {
     shadowJar {
-        mappingType = 'SEARGE'
+        mappingType = 'NOTCH'
     }
     jar {
         useNotchSrg()

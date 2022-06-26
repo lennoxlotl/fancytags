@@ -18,26 +18,25 @@
  */
 package de.lennox.fancytags;
 
+import java.util.List;
 import net.labymod.api.LabyModAddon;
 import net.labymod.settings.elements.SettingsElement;
 
-import java.util.List;
-
 public class FancyTags extends LabyModAddon {
 
-    @Override
-    public void onEnable() {
-        System.out.println("Successfully loaded FancyTags!");
-    }
+  @Override
+  public void onEnable() {
+    System.out.println("Successfully loaded FancyTags!");
+  }
 
-    @Override
-    public void loadConfig() {
+  @Override
+  public void loadConfig() {
 
-    }
+  }
 
-    @Override
-    protected void fillSettings(List<SettingsElement> list) {
+  @Override
+  protected void fillSettings(List<SettingsElement> list) {
 
-    }
+  }
 
 }

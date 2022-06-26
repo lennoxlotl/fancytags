@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "de.lennox.fancytags.injection.mixin",
+  "package": "de.lennox.fancytags.inject.mixin",
   "refmap": "client.mixins.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [

@@ -19,8 +19,9 @@
 package de.lennox.fancytags.render.font;
 
 public class FontCharacter {
-    public float width;
-    public float height;
-    public int x;
-    public int y;
+
+  public float width;
+  public float height;
+  public int x;
+  public int y;
 }
