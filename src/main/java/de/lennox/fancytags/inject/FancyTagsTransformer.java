@@ -49,7 +49,7 @@ public class FancyTagsTransformer implements IClassTransformer {
   private static final List<String> CLASSES_TO_MAP = Lists.newArrayList(
     "de.lennox.fancytags.inject.mixin.entity.MixinRendererLivingEntity",
     "de.lennox.fancytags.inject.mixin.labymod.MixinRenderPlayerImpl");
-  private static final File ADDON_PATH = new File("LabyMod/addons-1.8/FancyTags-1.0.jar");
+  private static final File ADDON_PATH = new File("LabyMod/addons-1.8/FancyTags.jar");
   private boolean forge;
 
   public FancyTagsTransformer() {
