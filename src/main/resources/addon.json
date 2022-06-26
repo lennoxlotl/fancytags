@@ -3,8 +3,8 @@
   "name": "FancyTags",
   "mainClass": "de.lennox.fancytags.FancyTags",
   "transformerClass": "de.lennox.fancytags.inject.FancyTagsTransformer",
-  "description": "Changes the font of the normal minecraft entity labels.",
-  "version": 1.0,
+  "description": "Replaces the Font of the Minecraft Name Tags with a fancier one",
+  "version": "0.1.0",
   "author": "Lennox",
   "category": 1
 }
