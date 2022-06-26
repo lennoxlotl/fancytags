@@ -24,7 +24,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew shadowJar
       - name: Re-obfuscate with Gradle
         run: ./gradlew reobfShadowJar
       - name: Upload jar
