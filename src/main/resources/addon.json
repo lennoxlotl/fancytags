@@ -4,7 +4,7 @@
   "mainClass": "de.lennox.fancytags.FancyTags",
   "transformerClass": "de.lennox.fancytags.inject.FancyTagsTransformer",
   "description": "Replaces the Font of the Minecraft Name Tags with a fancier one",
-  "version": "0.1.0",
+  "version": 0.1,
   "author": "Lennox",
   "category": 1
 }

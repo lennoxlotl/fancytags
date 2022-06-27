@@ -46,10 +46,10 @@ import org.spongepowered.asm.mixin.Mixins;
  */
 public class FancyTagsTransformer implements IClassTransformer {
 
+  private static final boolean DEVELOPMENT_ENVIRONMENT = false;
   private static final List<String> CLASSES_TO_MAP = Lists.newArrayList(
     "de.lennox.fancytags.inject.mixin.entity.MixinRendererLivingEntity",
     "de.lennox.fancytags.inject.mixin.labymod.MixinRenderPlayerImpl");
-  private static final File ADDON_PATH = new File("LabyMod/addons-1.8/FancyTags.jar");
   private boolean forge;
 
   public FancyTagsTransformer() {
@@ -64,21 +64,24 @@ public class FancyTagsTransformer implements IClassTransformer {
     System.out.println("Injecting mixins...");
     // Get the correct class loader
     ClassLoader classLoader = Launch.class.getClassLoader();
+    String className = "/de/lennox/fancytags/inject/FancyTagsTransformer.class";
+    String classPath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+    File path = new File(classPath.substring(DEVELOPMENT_ENVIRONMENT ? 0 : 5,
+      classPath.length() - className.length() - (DEVELOPMENT_ENVIRONMENT ? 0 : 1)));
     try {
       // Call the addURL method in the class loader
       Method method = classLoader.getClass().getSuperclass().getDeclaredMethod("addURL", URL.class);
       method.setAccessible(true);
-      method.invoke(classLoader, ADDON_PATH.toURI().toURL());
+      method.invoke(classLoader, path.toURI().toURL());
       /// Load all classes to the class loader
       for (String s : classesToLoad()) {
-        System.out.println("Loading class " + s + ".class");
         try {
           classLoader.loadClass(s);
-        } catch (ClassNotFoundException | NoClassDefFoundError e) {
-          e.printStackTrace();
+          System.out.println("Loaded " + s + " successfully!");
+        } catch (ClassNotFoundException | NoClassDefFoundError ignored) {
         }
       }
-      System.out.println("Injected " + ADDON_PATH.getName() + " to class path.");
+      System.out.println("Injected " + path.getName() + " to class path.");
     } catch (MalformedURLException | NoSuchMethodException | InvocationTargetException |
              IllegalAccessException e) {
       e.printStackTrace();
@@ -105,6 +108,9 @@ public class FancyTagsTransformer implements IClassTransformer {
 
   @Override
   public byte[] transform(String name, String transformedName, byte[] basicClass) {
+    if (DEVELOPMENT_ENVIRONMENT) {
+      return basicClass;
+    }
     // Transform required classes
     if (CLASSES_TO_MAP.contains(name)) {
       // Only transform on forge
